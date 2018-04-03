@@ -22,10 +22,10 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "bundler", "~> 1.16"
   spec.add_development_dependency "rake", "~> 10.0"
   spec.add_development_dependency "rspec", "~> 3.0"
-  spec.add_development_dependency "digest-crc", "~> 0.4"
-  spec.add_development_dependency "dry-validation", "~> 0.11"
-  spec.add_development_dependency "money", "~> 6.10"
-  spec.add_development_dependency "countries", "~> 2.1"
-  spec.add_development_dependency "iso639", "~> 1.3"
-  spec.add_development_dependency "rqrcode", "~> 0.10"
+  spec.add_runtime_dependency "digest-crc", ["~> 0.4"]
+  spec.add_runtime_dependency "dry-validation", ["~> 0.11"]
+  spec.add_runtime_dependency "money", ["~> 6.10"]
+  spec.add_runtime_dependency "countries", ["~> 2.1"]
+  spec.add_runtime_dependency "iso639", ["~> 1.3"]
+  spec.add_runtime_dependency "rqrcode", ["~> 0.10"]
 end
