@@ -7,7 +7,7 @@ module Rubyqrpay
   class Validator
     CONSUMER_DATA_REQUEST_PATTERN = /^(A?E?M|E?M?A|M?A?E|A?M?E|E?M?A|M?E?A)$/
     ANS_PATTERN = /^[\w\s.:\/?#\[\]@!$&'()*+,;=\-~]*$/
-    MIN_MCC = 1_000
+    MIN_MCC = 1
     MAX_MCC = 10_000
     MIN_FIXED = 0.01
     MAX_FIXED = 9_999_999_999.99
