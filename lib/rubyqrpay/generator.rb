@@ -163,7 +163,7 @@ module Rubyqrpay
     end
 
     def self.mcc_format(mcc)
-      "%4d" % [mcc] unless mcc.nil?
+      "%.4d" % mcc unless mcc.to_i == 0
     end
   end
 end
