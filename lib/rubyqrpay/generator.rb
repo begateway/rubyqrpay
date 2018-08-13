@@ -47,7 +47,7 @@ module Rubyqrpay
         ID_POI_METHOD                    => opts[:amount] ? POI_METHOD_DYNAMIC : POI_METHOD_STATIC,
         ID_MERCHANT_INFORMATION_32       => merchant_account_32_data(opts[:merchant_account_32]),
         ID_MERCHANT_INFORMATION_33       => merchant_account_33_data(opts[:agregator_id], opts[:merchant_account_33]),
-        ID_MERCHANT_CATEGORY_CODE        => opts[:merchant_category_code],
+        ID_MERCHANT_CATEGORY_CODE        => mcc_format(opts[:merchant_category_code]),
         ID_TRANSACTION_CURRENCY          => opts[:currency],
         ID_TRANSACTION_AMOUNT            => format_amount(opts[:amount]),
         ID_TIP_OF_CONVENIENCE_INDICATOR  => opts[:convenience_indicator],
@@ -160,6 +160,10 @@ module Rubyqrpay
       x = Digest::CRC16CCITT.new
       x.update(data)
       ID_CRC + CRC_SYMBOL_SIZE + x.hexdigest.upcase
+    end
+
+    def self.mcc_format(mcc)
+      "%.4d" % mcc unless mcc.to_i == 0
     end
   end
 end
