@@ -20,10 +20,10 @@ Or install it yourself as:
 
 ```ruby
 transaction_information = {
-  agregator_id: 'rubyqrpay',
+  agregator_id: 'rubyQRpay',
   merchant_account_32: {
-    service_code_erip: '111111',
-    payer_unique_id: '12345678',
+    service_code_erip: '123456',
+    payer_unique_id: '123456789',
     payer_number: '--',
     amount_edit_possibility: true,
   },
@@ -40,13 +40,13 @@ transaction_information = {
   fixed_fee: 0.01,
   percentage_fee: 12.0,
   country: 'BY',
-  merchant_name: 'Egor',
+  merchant_name: 'Ivan Ivanov',
   merchant_city: 'Minsk',
-  postal_code: '222310',
+  postal_code: '123456',
   additional_data: {
     bill_number: '--',
     mobile_number: '--',
-    store_label: '--',
+    store_label: "OOO \"rubyQRpay\"",
     loyalty_number: '***',
     reference_label: '***',
     customer_label: '--',
@@ -56,7 +56,7 @@ transaction_information = {
   },
   merchant_information_language: {
     language_reference: 'ru',
-    name_alternate: 'Егор',
+    name_alternate: 'Иван Иванов',
     city_alternate: 'Минск'
   }
 }

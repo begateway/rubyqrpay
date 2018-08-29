@@ -6,7 +6,7 @@ require 'iso639'
 module Rubyqrpay
   class Validator
     CONSUMER_DATA_REQUEST_PATTERN = /^(A?E?M|E?M?A|M?A?E|A?M?E|E?M?A|M?E?A)$/
-    ANS_PATTERN = /^[\w\s.:\/?#\[\]@!$&'()*+,;=\-~]*$/
+    ANS_PATTERN = /^[a-zA-Z0-9!@#$&()\-`.+,\/\" *]*$/ # '*' is a specific symbol for additional_data field
     MIN_MCC = 0
     MAX_MCC = 10_000
     MIN_FIXED = 0.01
