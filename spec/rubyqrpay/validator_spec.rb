@@ -22,13 +22,13 @@ RSpec.describe Rubyqrpay::Validator do
         fixed_fee: 0.01,
         percentage_fee: 12.0,
         country: 'BY',
-        merchant_name: 'Egor',
+        merchant_name: 'Ivan Ivanov',
         merchant_city: 'Minsk',
         postal_code: '222310',
         additional_data: {
           bill_number: '--',
           mobile_number: '--',
-          store_label: '--',
+          store_label: "OOO \"rubyQRpay\"",
           loyalty_number: '***',
           reference_label: '***',
           customer_label: '--',
@@ -38,7 +38,7 @@ RSpec.describe Rubyqrpay::Validator do
         },
         merchant_information_language: {
           language_reference: 'ru',
-          name_alternate: 'Егор',
+          name_alternate: 'Иван Иванов',
           city_alternate: 'Минск'
         }
       }
