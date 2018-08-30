@@ -71,8 +71,8 @@ RSpec.describe Rubyqrpay::Validator do
     end
 
     context 'agregator_id' do
-      context 'when is not valid' do
-        before { transaction_information[:agregator_id] = '^%`|' }
+      context 'when is not in ASCII format' do
+        before { transaction_information[:agregator_id] = 200.chr }
 
         it 'raises an exception' do
           expect{subject}.to raise_error(ArgumentError, /agregator_id/)
