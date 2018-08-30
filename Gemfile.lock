@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    rubyqrpay (0.2.5)
+    rubyqrpay (0.2.6)
       countries (~> 2.1)
       digest-crc (~> 0.4)
       dry-validation (~> 0.11)
