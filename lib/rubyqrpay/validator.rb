@@ -6,7 +6,7 @@ require 'iso639'
 module Rubyqrpay
   class Validator
     CONSUMER_DATA_REQUEST_PATTERN = /^(A?E?M|E?M?A|M?A?E|A?M?E|E?M?A|M?E?A)$/
-    ANS_PATTERN = /[[:ascii:]]/
+    ANS_PATTERN = /^[[:ascii:]]*$/
     MIN_MCC = 0
     MAX_MCC = 10_000
     MIN_FIXED = 0.01
@@ -87,9 +87,9 @@ module Rubyqrpay
         optional(:percentage_fee).maybe(:float?, gteq?: MIN_PERCENT, lteq?: MAX_PERCENT)
         optional(:merchant_category_code).maybe(:int?, gteq?: MIN_MCC, lt?: MAX_MCC)
         optional(:amount).maybe(:float?, gteq?: MIN_FIXED, lteq?: MAX_FIXED)
-        optional(:country).maybe(:str?)
-        optional(:merchant_name).maybe(:str?, max_size?: 25, format?: ANS_PATTERN)
-        optional(:merchant_city).maybe(:str?, max_size?: 15, format?: ANS_PATTERN)
+        required(:country).filled(:str?)
+        required(:merchant_name).filled(:str?, max_size?: 25, format?: ANS_PATTERN)
+        required(:merchant_city).filled(:str?, max_size?: 15, format?: ANS_PATTERN)
         optional(:postal_code).maybe(:str?, max_size?: 10, format?: ANS_PATTERN)
 
         optional(:additional_data).schema do

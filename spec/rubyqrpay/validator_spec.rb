@@ -79,8 +79,8 @@ RSpec.describe Rubyqrpay::Validator do
         end
       end
 
-      context 'when is missing' do
-        before { transaction_information.delete(:agregator_id) }
+      context 'when is empty' do
+        before { transaction_information[:agregator_id] = '' }
 
         context 'when merchant_account_33 exist' do
           it 'raises an exception' do
@@ -368,8 +368,8 @@ RSpec.describe Rubyqrpay::Validator do
       context 'when is missing' do
         before { transaction_information.delete(:country) }
 
-        it 'returns valid hash' do
-          expect{subject}.not_to raise_error
+        it 'raises an exception' do
+          expect{subject}.to raise_error(ArgumentError, /country/)
         end
       end
     end
@@ -399,16 +399,21 @@ RSpec.describe Rubyqrpay::Validator do
         end
       end
 
-      context 'when is missing' do
-        before { transaction_information.delete(:country) }
-        before do
-          transaction_information.delete(:merchant_name)
-          transaction_information.delete(:merchant_city)
-          transaction_information.delete(:postal_code)
+      context 'when is empty' do
+        context 'merchant_name' do
+          before { transaction_information[:merchant_name] = '' }
+
+          it 'raises an exception' do
+            expect{subject}.to raise_error(ArgumentError, /merchant_name/)
+          end
         end
 
-        it 'returns valid hash' do
-          expect{subject}.not_to raise_error
+        context 'merchant_city' do
+          before { transaction_information[:merchant_city] = '' }
+
+          it 'raises an exception' do
+            expect{subject}.to raise_error(ArgumentError, /merchant_city/)
+          end
         end
       end
     end
