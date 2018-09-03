@@ -411,7 +411,7 @@ RSpec.describe Rubyqrpay::Validator do
         context 'merchant_city' do
           before { transaction_information[:merchant_city] = '' }
 
-          it 'raises an exception' do
+          it 'does not raise an exception' do
             expect{subject}.not_to raise_error
           end
         end
