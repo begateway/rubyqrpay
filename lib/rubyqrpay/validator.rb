@@ -89,7 +89,7 @@ module Rubyqrpay
         optional(:amount).maybe(:float?, gteq?: MIN_FIXED, lteq?: MAX_FIXED)
         required(:country).filled(:str?)
         required(:merchant_name).filled(:str?, max_size?: 25, format?: ANS_PATTERN)
-        required(:merchant_city).filled(:str?, max_size?: 15, format?: ANS_PATTERN)
+        optional(:merchant_city).maybe(:str?, max_size?: 15, format?: ANS_PATTERN)
         optional(:postal_code).maybe(:str?, max_size?: 10, format?: ANS_PATTERN)
 
         optional(:additional_data).schema do
