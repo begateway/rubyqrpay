@@ -2,8 +2,7 @@ module Rubyqrpay
   class Parser
     class << self
       def parse_payload(payload)
-        payload = URI.unescape payload
-        parse_to_params payload
+        parse_to_params(URI.unescape(payload))
       end
 
       private
