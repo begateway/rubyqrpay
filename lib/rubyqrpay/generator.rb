@@ -50,7 +50,7 @@ module Rubyqrpay
         ID_MERCHANT_CATEGORY_CODE        => mcc_format(opts[:merchant_category_code]),
         ID_TRANSACTION_CURRENCY          => opts[:currency],
         ID_TRANSACTION_AMOUNT            => format_amount(opts[:amount]),
-        ID_TIP_OF_CONVENIENCE_INDICATOR  => opts[:convenience_indicator],
+        ID_TIP_OF_CONVENIENCE_INDICATOR  => format_indicator(opts[:convenience_indicator]),
         ID_COUNTRY                       => opts[:country],
         ID_MERCHANT_NAME                 => opts[:merchant_name],
         ID_MERCHANT_CITY                 => opts[:merchant_city],
@@ -156,10 +156,14 @@ module Rubyqrpay
     end
 
     def self.crc(data)
-      data += ID_CRC + CRC_SYMBOL_SIZE
-      x = Digest::CRC16CCITT.new
-      x.update(data)
-      ID_CRC + CRC_SYMBOL_SIZE + x.hexdigest.upcase
+      # === old algorithm
+      # data += ID_CRC + CRC_SYMBOL_SIZE
+      # x = Digest::CRC16CCITT.new
+      # x.update(data)
+      # ID_CRC + CRC_SYMBOL_SIZE + x.hexdigest.upcase
+
+      # === updated algorithm
+      ID_CRC + CRC_SYMBOL_SIZE + Digest::SHA256.hexdigest(data).slice(-4..-1).upcase
     end
 
     def self.mcc_format(mcc)
