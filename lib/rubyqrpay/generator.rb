@@ -12,7 +12,7 @@ module Rubyqrpay
       opts = Rubyqrpay::Validator.validate_payload(opts)
       unless opts.nil?
         payload = generation(opts)
-        percent_encode payload
+        # percent_encode payload # Temporary solution to fix invalid BNB URI decode
       end
     end
 
@@ -135,7 +135,7 @@ module Rubyqrpay
 
     def self.join_hash(hash)
       hash.map do |id, value|
-        value = value.to_s
+        value = percent_encode(value.to_s).gsub(/\%.{2}/, '')
         unless value.empty?
           len = "00#{value.size}".slice(-2..-1)
           id + len + value
