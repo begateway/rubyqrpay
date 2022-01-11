@@ -16,7 +16,7 @@ RSpec.describe Rubyqrpay::Generator do
           merchant_city: 'Minsk'
         }
       end
-      let(:payload) { '00020101021232430010by.raschet010612345610093360957501202115303933540510.055802BY5911Ivan%20Ivanov6005Minsk6304E1FE' }
+      let(:payload) { '00020101021232430010by.raschet010612345610093360957501202115303933540510.05550105802BY5910IvanIvanov6005Minsk63049906' }
 
       it "returns valid payload" do
         expect(subject).to eq(payload)
@@ -44,7 +44,7 @@ RSpec.describe Rubyqrpay::Generator do
       context 'when agregator exists' do
         before { transaction_information[:agregator_id] = 'bepaid' }
 
-        let(:payload) { "00020101021232430010by.raschet0106123456100933609575012021133250014by.epos.bepaid03031235303933540510.055802BY5911Ivan%20Ivanov6005Minsk6304179F" }
+        let(:payload) { "00020101021232430010by.raschet0106123456100933609575012021133250014by.epos.bepaid03031235303933540510.05550105802BY5910IvanIvanov6005Minsk63049211" }
 
         it 'return valid payload' do
           expect(subject).to eq(payload)
@@ -79,7 +79,7 @@ RSpec.describe Rubyqrpay::Generator do
     let(:payload) { '00020101021229300012D156000000000510A93FO3230Q31280012D15600000001030812345678' +
                     '520441115802CN5914BEST TRANSPORT6007BEIJING64200002ZH0104最佳运输0202北京540523.72' +
                     '53031565502016233030412340603***0708A60086670902ME91320016A011223344998877070812345678' }
-    let(:crc_result) { '6304A13A' }
+    let(:crc_result) { '6304628F' }
 
     it "returns valid checksum" do
       expect(Rubyqrpay::Generator.crc(payload)).to eq(crc_result)
