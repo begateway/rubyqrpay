@@ -148,7 +148,7 @@ module Rubyqrpay
     end
 
     def self.format_indicator(convenience_indicator)
-      "0#{convenience_indicator}"
+      "0#{convenience_indicator}" if convenience_indicator
     end
 
     def self.percent_encode(str)

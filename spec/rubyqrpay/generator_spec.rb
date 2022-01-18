@@ -16,7 +16,7 @@ RSpec.describe Rubyqrpay::Generator do
           merchant_city: 'Minsk'
         }
       end
-      let(:payload) { '00020101021232430010by.raschet010612345610093360957501202115303933540510.05550105802BY5910IvanIvanov6005Minsk63049906' }
+      let(:payload) { '00020101021232430010by.raschet010612345610093360957501202115303933540510.055802BY5910IvanIvanov6005Minsk6304C25A' }
 
       it "returns valid payload" do
         expect(subject).to eq(payload)
@@ -44,7 +44,7 @@ RSpec.describe Rubyqrpay::Generator do
       context 'when agregator exists' do
         before { transaction_information[:agregator_id] = 'bepaid' }
 
-        let(:payload) { "00020101021232430010by.raschet0106123456100933609575012021133250014by.epos.bepaid03031235303933540510.05550105802BY5910IvanIvanov6005Minsk63049211" }
+        let(:payload) { '00020101021232430010by.raschet0106123456100933609575012021133250014by.epos.bepaid03031235303933540510.055802BY5910IvanIvanov6005Minsk63047647' }
 
         it 'return valid payload' do
           expect(subject).to eq(payload)
@@ -63,6 +63,28 @@ RSpec.describe Rubyqrpay::Generator do
         it 'raises an exception' do
           expect{subject}.to raise_error(ArgumentError)
         end
+      end
+    end
+
+    context 'when example case from documentation' do
+      let(:transaction_information) do
+        {
+          merchant_account_32: {
+            service_code_erip: '393931',
+            payer_unique_id: '336095750'
+          },
+          currency: 933,
+          amount: 10.05,
+          country: 'BY',
+          merchant_name: 'mts',
+          merchant_city: 'Belarus'
+        }
+      end
+
+      let(:payload) { '00020101021232430010by.raschet010639393110093360957501202115303933540510.055802BY5903mts6007Belarus6304CA82' }
+
+      it 'return valid payload' do
+        expect(subject).to eq(payload)
       end
     end
 
