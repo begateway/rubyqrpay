@@ -2,7 +2,7 @@ require 'rubyqrpay/version'
 require_relative 'validator'
 require_relative 'constants'
 require 'rqrcode'
-require 'digest/crc16_ccitt'
+require 'digest'
 require 'base64'
 require 'uri'
 
