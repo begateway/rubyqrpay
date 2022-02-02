@@ -60,7 +60,7 @@ module Rubyqrpay
       }
       payload_data = convenience_indicator_case(payload_data, opts)
       payload = join_hash(payload_data)
-      payload += crc(payload)
+      payload += check_sum(payload)
     end
 
     def self.merchant_account_32_data(merchant_account)
@@ -155,7 +155,7 @@ module Rubyqrpay
       URI.escape(str)
     end
 
-    def self.crc(data)
+    def self.check_sum(data)
       # === old algorithm
       # data += ID_CRC + CRC_SYMBOL_SIZE
       # x = Digest::CRC16CCITT.new
@@ -163,7 +163,7 @@ module Rubyqrpay
       # ID_CRC + CRC_SYMBOL_SIZE + x.hexdigest.upcase
 
       # === updated algorithm
-      ID_CRC + CRC_SYMBOL_SIZE + Digest::SHA256.hexdigest(data).slice(-4..-1).upcase
+      ID_CHECK_SUM + CHECK_SUM_SYMBOL_SIZE + Digest::SHA256.hexdigest(data).slice(-4..-1).upcase
     end
 
     def self.mcc_format(mcc)

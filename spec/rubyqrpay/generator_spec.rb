@@ -97,22 +97,22 @@ RSpec.describe Rubyqrpay::Generator do
     end
   end
 
-  describe '.crc' do
+  describe '.check_sum' do
     let(:payload) { '00020101021229300012D156000000000510A93FO3230Q31280012D15600000001030812345678' +
                     '520441115802CN5914BEST TRANSPORT6007BEIJING64200002ZH0104最佳运输0202北京540523.72' +
                     '53031565502016233030412340603***0708A60086670902ME91320016A011223344998877070812345678' }
-    let(:crc_result) { '6304628F' }
+    let(:check_sum_result) { '6304628F' }
 
     it 'returns valid checksum' do
-      expect(Rubyqrpay::Generator.crc(payload)).to eq(crc_result)
+      expect(Rubyqrpay::Generator.check_sum(payload)).to eq(check_sum_result)
     end
 
     context 'when case from documentation' do
       let(:payload) { '00020132430010by.raschet010639393110093360957501202115303933540510.055802BY5903mts6007Belarus' }
-      let(:crc_result) { '6304689C' }
+      let(:check_sum_result) { '6304689C' }
 
       it 'returns valid checksum' do
-        expect(Rubyqrpay::Generator.crc(payload)).to eq(crc_result)
+        expect(Rubyqrpay::Generator.check_sum(payload)).to eq(check_sum_result)
       end
     end
   end
