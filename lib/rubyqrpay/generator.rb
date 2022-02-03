@@ -2,7 +2,7 @@ require 'rubyqrpay/version'
 require_relative 'validator'
 require_relative 'constants'
 require 'rqrcode'
-require 'digest/crc16_ccitt'
+require 'digest'
 require 'base64'
 require 'uri'
 
@@ -60,7 +60,7 @@ module Rubyqrpay
       }
       payload_data = convenience_indicator_case(payload_data, opts)
       payload = join_hash(payload_data)
-      payload += crc(payload)
+      payload += check_sum(payload)
     end
 
     def self.merchant_account_32_data(merchant_account)
@@ -148,14 +148,14 @@ module Rubyqrpay
     end
 
     def self.format_indicator(convenience_indicator)
-      "0#{convenience_indicator}"
+      "0#{convenience_indicator}" if convenience_indicator
     end
 
     def self.percent_encode(str)
       URI.escape(str)
     end
 
-    def self.crc(data)
+    def self.check_sum(data)
       # === old algorithm
       # data += ID_CRC + CRC_SYMBOL_SIZE
       # x = Digest::CRC16CCITT.new
@@ -163,7 +163,7 @@ module Rubyqrpay
       # ID_CRC + CRC_SYMBOL_SIZE + x.hexdigest.upcase
 
       # === updated algorithm
-      ID_CRC + CRC_SYMBOL_SIZE + Digest::SHA256.hexdigest(data).slice(-4..-1).upcase
+      ID_CHECK_SUM + CHECK_SUM_SYMBOL_SIZE + Digest::SHA256.hexdigest(data).slice(-4..-1).upcase
     end
 
     def self.mcc_format(mcc)
