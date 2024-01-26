@@ -135,7 +135,7 @@ module Rubyqrpay
 
     def self.join_hash(hash)
       hash.map do |id, value|
-        value = percent_encode(value.to_s).gsub(/\%.{2}/, '')
+        value = value.to_s.gsub(/[\s\<\>\"\#\%\{\}\|\\\^\~\[\]\`]+/, '')
         unless value.empty?
           len = "00#{value.size}".slice(-2..-1)
           id + len + value
